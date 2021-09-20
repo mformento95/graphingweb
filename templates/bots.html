@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel = "stylesheet" type = "text/css" href = "../static/index.css" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <title>Final website</title>
+</head>
+<body>
+<div style="background-color: rgba(0, 0, 0, 0.1); width: 100%;height: 100%; z-index: -10">
+<ul>
+  <li><a class="inactive" href="/">Home</a></li>
+    {% for bot in bots %}
+      <li><a class="{{'active' if url_for('bots_graphs', bname=bot.name) == '/bots/'+ bname else 'inactive' }}" href="/bots/{{bot.name}}">{{bot.name}}</a></li>
+    {% endfor %}
+</ul>
+<div style="margin-left:15%;padding:1px 16px;">
+  <h2 style="color: white">Bot Performance Monitoring</h2>
+    <h3 style="color: white"><em>"Wow such amazing website, thanks Mattia"</em> -Satisfied Customer 2021</h3>
+</div>
+<div class="square">
+    <p class="inbox">{{bname}} Performance</p>
+    <p class="comment1"></p>
+    <div id="chart" class="chartall"></div>
+    <script type="text/javascript">
+        var graphs = {{graph | safe}};
+        Plotly.plot('chart',graphs,{});
+    </script>
+</div>
+    <img src="https://i.imgur.com/e1IneGq.jpg" alt="this slowpoke moves"  width="250" style="margin-top:50%;" />
+<!--<footer>aaa</footer>-->
+</div>
+</body>
+</html>
