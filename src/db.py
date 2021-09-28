@@ -1,13 +1,14 @@
 import psycopg2
 import pandas as pd
+import datetime
 # query = 'SELECT "timestamp", coin_id, "open", high, low, "close", volume, quote_av, trades, tb_base_av, tb_quote_av, "ignore", dumptime, datasource_id FROM prices.coins;'
 
 query = 'SELECT ' \
         '"timestamp", "close" ' \
-        'FROM prices.coins ' \
-        'where coin_id=%d ' \
-        'ORDER BY TIMESTAMP DESC LIMIT 100;'
-
+        'FROM prices.coins p ' \
+        "where p.coin_id='%d' AND p.timestamp >= '%s' AND p.timestamp <= '%s'" \
+        'ORDER BY p.timestamp DESC LIMIT 2000;'
+"SELECT * FROM prices.coins p where p.timestamp >= '2021-01-01' and p.timestamp <= '2021-04-02' limit 20;"
 # class postgres():
 #     def __init__(self):
 
@@ -19,11 +20,15 @@ def get_connection():
                                   database="production")
 
 
-def last_binance(coin):
+def records_query(s_date, e_date, coin):
+    if s_date == '':
+        s_date = datetime.datetime.today() - datetime.timedelta(days=1)
+    if e_date == '':
+        e_date = datetime.datetime.today() + datetime.timedelta(days=1)
     connection = get_connection()
     if not connection: raise Exception('Connection Error')
     cursor = connection.cursor()
-    cursor.execute(query % coin)
+    cursor.execute(query % (coin, s_date.strftime("%Y-%m-%d"), e_date.strftime("%Y-%m-%d")))
     res = cursor.fetchall()
     cursor.close()
     connection.close()

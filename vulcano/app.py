@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 import json
 import plotly
 import plotly.graph_objs as go
-from src.config import bots, coins
-from src.db import records_query
-from dateutil import parser
+from src.config import bots
+from src.db import last_binance
+
 app = Flask(__name__)
 
 '''    {% autoescape false %}
@@ -18,31 +18,34 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     graph="{{}}"
-    content=''
-    return render_template('index.html', bots=bots, coins=list(coins.keys()))
+    return render_template('index.html', bots=bots, graph=graph, )
 
 
-@app.route('/graph', methods=['GET', 'POST'])
-def bots_graphs():
-    bname = request.form.get('bots')
-    coin = request.form.get('coins')
-    s_date = request.form.get('sd')
-    e_date = request.form.get('ed')
-    if None in [bname, coin, s_date, e_date]:
-        return redirect("/", code=302)
-    if s_date != '':
-        s_date = parser.parse(s_date)
-    if e_date != '':
-        e_date = parser.parse(e_date)
+@app.route('/bots/<bname>', methods=['GET', 'POST'])
+def bots_graphs(bname):
     botd = list(a for a in bots if a['name'] == bname)
     if len(botd) == 0 or len(botd) > 1:
         return '<p> WTFFFFFFF </p>'
-    df = records_query(s_date, e_date, coins[coin])
+    df = last_binance(1)
     binance = go.Scatter(x=df['timestamp'].tolist(), y=df['values'].tolist(), name='Binance')
     bot = go.Scatter(x=df['timestamp'].tolist(), y=list(float(a)*1.01 for a in df['values'].tolist()), name=bname)
     graph = json.dumps([binance, bot], cls=plotly.utils.PlotlyJSONEncoder)
     print(bots)
     return render_template('bots.html', bots=bots, graph=graph, bname=bname)
+
+
+@app.route('/all', methods=['GET', 'POST'])
+def all():
+    bname = 'Etna'
+    botd = list(a for a in bots if a['name'] == bname)
+    if len(botd) == 0 or len(botd) > 1:
+        return '<p> WTFFFFFFF </p>'
+    df = last_binance(1)
+    binance = go.Scatter(x=df['timestamp'].tolist(), y=df['values'].tolist(), name='Binance')
+    bot = go.Scatter(x=df['timestamp'].tolist(), y=list(float(a)*1.01 for a in df['values'].tolist()), name=bname)
+    graph = json.dumps([binance, bot], cls=plotly.utils.PlotlyJSONEncoder)
+    print(bots)
+    return render_template('index.html', bots=bots, graph=graph)
 
 
 if __name__ == '__main__':
