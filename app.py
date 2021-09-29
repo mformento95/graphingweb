@@ -6,7 +6,7 @@ from src.config import bots, coins
 from src.db import records_query
 from dateutil import parser
 app = Flask(__name__)
-
+import datetime
 '''    {% autoescape false %}
     {{descr}}
     {% endautoescape %}'''
@@ -17,9 +17,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    graph="{{}}"
-    content=''
-    return render_template('index.html', bots=bots, coins=list(coins.keys()))
+    s_date = datetime.datetime.today()
+    e_date = datetime.datetime.today() + datetime.timedelta(days=1)
+    return render_template('content.html', bots=bots, coins=list(coins.keys()), task='index', dates=[s_date.strftime("%Y-%m-%d"), e_date.strftime("%Y-%m-%d")])
 
 
 @app.route('/graph', methods=['GET', 'POST'])
@@ -41,8 +41,7 @@ def bots_graphs():
     binance = go.Scatter(x=df['timestamp'].tolist(), y=df['values'].tolist(), name='Binance')
     bot = go.Scatter(x=df['timestamp'].tolist(), y=list(float(a)*1.01 for a in df['values'].tolist()), name=bname)
     graph = json.dumps([binance, bot], cls=plotly.utils.PlotlyJSONEncoder)
-    print(bots)
-    return render_template('bots.html', bots=bots, graph=graph, bname=bname)
+    return render_template('content.html', bots=bots, coins=list(coins.keys()), graph=graph, bname=bname, task='graph', dates=[request.form.get('sd'), request.form.get('ed')])
 
 
 if __name__ == '__main__':

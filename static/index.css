@@ -96,3 +96,13 @@ details > p {
   margin-bottom: 18px;
   border-radius: 8px;
 }
+.chart{
+  /*position:absolute*/
+  /*padding:50px;*/
+  /*margin: 10px;*/
+}
+.inchart{
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 25px;
+  padding: 10px;
+}

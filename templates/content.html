@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel = "stylesheet" type = "text/css" href = "../static/index.css" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <title>SeismicTrading</title>
+</head>
+<body>
+<ul>
+  <li><img src="../static/images/logo.jpg" alt="logo" style="width: 100%; height: 100%"> </li>
+  <li><h1 class="navbartitle">Seismic Trading</h1></li>
+  <li style="float:right"><a class="active" href="#about">Home</a></li>
+</ul>
+<div class="incontent">
+    <form action="/graph" method="POST">
+        <div class="flex-container">
+            <div><p class="inflex">Start date:</p><p class="inflex">End date:</p></div>
+          <div><input style="margin-bottom: 5px; margin-top:5px" type="date" value="{{dates[0]}}" name="sd"><br><input type="date" value="{{dates[1]}}" name="ed"></div>
+          <div><label for="bots"><p class="inflex">Choose a bot:</p></label><label for="coins"><p class="inflex">Choose a coin:</p></label></div>
+          <div><select style="margin-bottom: 5px; margin-top:3px" name="bots" id="bots">
+                {% for bot in bots %}
+                    <option value="{{bot.name}}">{{bot.name}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <select name="coins" id="coins">
+                {% for coin in coins %}
+                    <option value="{{coin}}">{{coin}}</option>
+                {% endfor %}
+            </select>
+          </div>
+        </div>
+        <button class="button button1">Submit</button>
+    </form>
+    <details>
+      <summary>Default values</summary>
+    </details>
+    <div class="inchart">
+    {% if task == 'index' %}
+        {% include 'index.html' %}
+    {% elif task == 'graph' %}
+        {% include 'graph.html' %}
+    {% endif %}
+    </div>
+</div>
+</body>
+</html>

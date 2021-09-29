@@ -7,7 +7,7 @@ query = 'SELECT ' \
         '"timestamp", "close" ' \
         'FROM prices.coins p ' \
         "where p.coin_id='%d' AND p.timestamp >= '%s' AND p.timestamp <= '%s'" \
-        'ORDER BY p.timestamp DESC LIMIT 2000;'
+        'ORDER BY p.timestamp DESC;'
 "SELECT * FROM prices.coins p where p.timestamp >= '2021-01-01' and p.timestamp <= '2021-04-02' limit 20;"
 # class postgres():
 #     def __init__(self):
