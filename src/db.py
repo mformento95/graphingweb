@@ -55,4 +55,4 @@ def results_query(s_date, e_date, strat_id):
     coin_id = cursor.fetchall()
     cursor.close()
     connection.close()
-    return pd.DataFrame(res, columns=['timestamp', 'resist', 'support']), coin_id[0] if len(coin_id) > 0 else None
+    return pd.DataFrame(res, columns=['timestamp', 'resist', 'support']), coin_id[0] if len(coin_id[0]) > 0 else None
