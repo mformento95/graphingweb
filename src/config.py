@@ -1,26 +1,21 @@
 bots = [
-            {
-                'name': 'Etna',
-             },
-            {
-                'name': 'Sopka',
-            },
-            {
-                'name': 'To_configure_1',
-             },
-            {
-                'name': 'To_configure_2',
-            },
-            {
-                'name': 'To_configure_3',
-            },
-            {
-                'name': 'To_configure_4',
-            },
-            {
-                'name': 'To_configure_5',
-            }
-        ]
+    {
+        'name': 'Jokull',
+        'strat_id': [1],
+    },
+    {
+        'name': 'Etna',
+        'strat_id': [-1],
+     },
+    {
+        'name': 'Sopka',
+        'strat_id': [-1],
+    },
+    {
+        'name': 'To_configure_1',
+        'strat_id': [-1],
+    }
+]
 
 coins = {
     'BTCUSDT': 1,

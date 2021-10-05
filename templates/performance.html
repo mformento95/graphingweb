@@ -1,0 +1,26 @@
+
+<div class="incontent">
+    <form action="/performance" method="POST">
+        <div class="flex-container">
+            <div><p class="inflex">Start date:</p><p class="inflex">End date:</p></div>
+          <div><input style="margin-bottom: 5px; margin-top:5px" type="date" value="{{dates[0]}}" name="sd"><br><input type="date" value="{{dates[1]}}" name="ed"></div>
+          <div><label for="bots"><p class="inflex">Choose a bot:</p></label></div>
+          <div><select style="margin-top: 5px" name="bots" id="bots">
+                {% for bot in bots %}
+                    {% for strategy in bot.strat_id %}
+                        <option value="{{bot.name}}.{{strategy}}">{{bot.name}}, ({{strategy}})</option>
+                    {% endfor %}
+                {% endfor %}
+            </select>
+          </div>
+          <div><button class="button button1">Submit</button></div>
+        </div>
+    </form>
+    <div class="inchart">
+        <div id="chart" class="chart"></div>
+        <script type="text/javascript">
+            var graphs = {{graph | safe}};
+            Plotly.plot('chart',graphs,{});
+        </script>
+    </div>
+</div>

@@ -16,6 +16,7 @@ li {
   margin: 0;
   float: left;
   height: 60px;
+  border-right: 1px solid #bbb;
 }
 
 li a {
@@ -46,7 +47,7 @@ li a:hover:not(.active) {
   margin-left: 10%;
   margin-right: 10%;
   height: 500px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: lightblue;
 
 }
 details > summary {
@@ -102,7 +103,7 @@ details > p {
   /*margin: 10px;*/
 }
 .inchart{
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: lightblue;
   margin-top: 25px;
   padding: 10px;
 }
