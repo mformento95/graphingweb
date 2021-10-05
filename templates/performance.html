@@ -8,7 +8,7 @@
           <div><select style="margin-top: 5px" name="bots" id="bots">
                 {% for bot in bots %}
                     {% for strategy in bot.strat_id %}
-                        <option value="{{bot.name}}.{{strategy}}">{{bot.name}}, ({{strategy}})</option>
+                        <option value="{{bot.name}}.{{strategy}}">{{bot.name}} ({{strategy}})</option>
                     {% endfor %}
                 {% endfor %}
             </select>
