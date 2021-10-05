@@ -16,7 +16,6 @@ li {
   margin: 0;
   float: left;
   height: 60px;
-  border-right: 1px solid #bbb;
 }
 
 li a {
@@ -32,7 +31,8 @@ li a:hover:not(.active) {
 }
 
 .active {
-  background-color: black;
+  /*background-color: black;*/
+  color: black;
   margin: 0;
   font-size: 20px;
   font-weight: bold;
@@ -47,8 +47,6 @@ li a:hover:not(.active) {
   margin-left: 10%;
   margin-right: 10%;
   height: 500px;
-  background-color: lightblue;
-
 }
 details > summary {
   padding: 4px;
@@ -91,7 +89,7 @@ details > p {
   cursor: pointer;
 }
 .button1 {
-  background-color: cornflowerblue;
+  background-color: black;
   padding: 9px 20px;
   margin-left: 18px;
   margin-bottom: 18px;
@@ -103,7 +101,6 @@ details > p {
   /*margin: 10px;*/
 }
 .inchart{
-  background-color: lightblue;
   margin-top: 25px;
   padding: 10px;
 }
