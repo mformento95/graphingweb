@@ -4,12 +4,12 @@ bots = [
         'strat_id': [1],
     },
     {
-        'name': 'Etna',
-        'strat_id': [-1],
+        'name': 'San Andreas Fault',
+        'strat_id': [14],
      },
     {
-        'name': 'Sopka',
-        'strat_id': [-1],
+        'name': 'Klyuchevskaya Sopka',
+        'strat_id': [15],
     },
     {
         'name': 'To_configure_1',
