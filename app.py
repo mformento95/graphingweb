@@ -71,13 +71,19 @@ def performance_bots():
         binance = go.Scatter(x=df['timestamp'].tolist(), y=df['values'].tolist(), name='Binance')
         support = go.Scatter(x=df['timestamp'].tolist(), y=df['support'].tolist(), name='Myopic_support')
         graph = json.dumps([resist, binance, support], cls=plotly.utils.PlotlyJSONEncoder)
-        title = "%s, strategy: %s, coin: %s" % (bname, strat_id, list(coins.keys())[list(coins.values()).index(coin_id[0])])
+        title = "%s, strategy: %s, coin: %s" % (
+        bname, strat_id, list(coins.keys())[list(coins.values()).index(coin_id[0])])
     if (s_date == '' and e_date == '') or (s_date is None and e_date is None):
         s_date = datetime.datetime.today()
         e_date = datetime.datetime.today() + datetime.timedelta(days=1)
 
     return render_template('content.html', bots=bots, graph=graph, task='performance', title=title,
                            dates=[s_date.strftime("%Y-%m-%d"), e_date.strftime("%Y-%m-%d")])
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return "500 error: oh ma gawd call Mattia asap he needs to fix me"
 
 
 if __name__ == '__main__':
