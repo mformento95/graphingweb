@@ -20,8 +20,8 @@ strategy_coin = "SELECT setup_info ->  'coin_id' from strategies.parameters wher
 
 def get_connection():
     return psycopg2.connect(user="postgres",
-                            password="august!2021",
-                            host="172.31.20.145",
+                            password="****",
+                            host="***.***.**.**",
                             port="5432",
                             database="production")
 
